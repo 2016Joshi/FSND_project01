@@ -105,7 +105,7 @@ GET  '/questions?page=<page_number>'
 - Example response: 
 
 ```json
-
+{
 "categories": {
    "1": "Science", 
    "2": "Art", 
