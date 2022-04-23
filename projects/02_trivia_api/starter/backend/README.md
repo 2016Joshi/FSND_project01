@@ -84,7 +84,7 @@ GET '/categories'
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
 
-
+```json
 {
 "categories" :{
 '1' : "Science",
@@ -96,6 +96,8 @@ GET '/categories'
 },
 "success" : true
 }
+
+```
 
 ## Testing
 To run the tests, run
