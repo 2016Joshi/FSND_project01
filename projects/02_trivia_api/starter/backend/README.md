@@ -87,7 +87,7 @@ GET '/categories'
 ```json
 {
 "categories" :{
-'1' : "Science",
+"1" : "Science",
 '2' : "Art",
 '3' : "Geography",
 '4' : "History",
