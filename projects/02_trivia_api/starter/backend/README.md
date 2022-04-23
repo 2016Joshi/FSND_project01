@@ -145,8 +145,8 @@ DELETE  '/questions/<question_id>'
 ```json
 
 {
-  deleted: 54,
-  success: true
+  "deleted": 54,
+  "success": true
 }
 ```
 
@@ -159,8 +159,8 @@ POST  '/questions'
 ```json
 
 {
-  created: 54,
-  success: true
+  "created": 55,
+  "success": true
 }
 ```
 
