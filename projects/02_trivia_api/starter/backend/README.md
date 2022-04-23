@@ -135,6 +135,107 @@ GET  '/questions?page=<page_number>'
 }
 
 ```
+
+DELETE  '/questions/<question_id>'
+- Delete the questions from the repository based on the question id if exists.
+- Request Arguments: question_id:int
+- Returns: Delete the question from repository and provides response with deleted id.
+- Example response: 
+
+```json
+
+{
+  deleted: 54,
+  success: true
+}
+```
+
+POST  '/questions'
+- Creates a new question in the repository. 
+- Request Body: {question:string, answer:string, difficulty:int, category:string} (all fields are mandatory)
+- Returns: Adds new question to repository and provides response with created question id.
+- Example response: 
+
+```json
+
+{
+  created: 54,
+  success: true
+}
+```
+
+POST  '/questions/search'
+- Fetches all questions where a substring matches the search term (not case-sensitive)
+- Request Body: {searchterm:string}
+- Returns: Matching questions (not case-sensitive)
+- Example response: 
+
+```json
+{
+"questions": [
+    {
+      "answer": "Muhammad Ali", 
+      "category": 4, 
+      "difficulty": 1, 
+      "id": 9, 
+      "question": "What boxer's original name is Cassius Clay?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 11
+  }
+```
+
+GET  '/categories/<int:category_id>/questions'
+- Fetches all questions for the specified category
+- Request Arguments: category_id:int
+- Returns: Matching questions based on the category selected
+- Example response: 
+
+```json
+{
+"current_category": 6, 
+  "questions": [
+    {
+      "answer": "Brazil", 
+      "category": 6, 
+      "difficulty": 3, 
+      "id": 10, 
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    }, 
+    {
+      "answer": "Uruguay", 
+      "category": 6, 
+      "difficulty": 4, 
+      "id": 11, 
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    }, 
+  ], 
+  "success": true, 
+  "total_questions": 2
+  }
+```
+
+POST  '/quizzes'
+- Fetches one random question for the seleted category. Previous questions are not asked again.
+- Request body: {previous_questions: arr, quiz_category: {id:int, type:string}}
+- Returns: Random question and answer with id, category and difficulty
+- Example response: 
+
+```json
+{
+  "question": {
+    "answer": "Uruguay", 
+    "category": 6, 
+    "difficulty": 4, 
+    "id": 11, 
+    "question": "Which country won the first ever soccer World Cup in 1930?"
+  }, 
+  "success": true
+}
+```
+
+
 ## Testing
 To run the tests, run
 ```
