@@ -234,7 +234,20 @@ POST  '/quizzes'
   "success": true
 }
 ```
+## Error Responses
+400 - Bad request
+404 - Not found
+422 - Not processable
 
+Sample error response
+
+```json
+{
+ "error": 422,
+ "success": false
+ "message": "Not processable"
+}
+```
 
 ## Testing
 To run the tests, run
