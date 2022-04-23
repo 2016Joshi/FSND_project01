@@ -79,7 +79,7 @@ One note before you delve into your tasks: for each endpoint, you are expected t
 
 ## Endpoints
 
-GET '/categories'
+GET  '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
@@ -98,7 +98,43 @@ GET '/categories'
 }
 
 ```
+GET  '/questions?page=<page_number>'
+- Fetches questons and answers based on the page number provided. By default page number is 1.
+- Request Arguments(optional): page:int
+- Returns: Object with categories with id: category_string as key:value pairs. Also Questions array with id, question, answer, category id and difficulty. It provides total number of questions available as well.
+- Example response: 
 
+```json
+
+"categories": {
+   "1": "Science", 
+   "2": "Art", 
+   "3": "Geography", 
+   "4": "History", 
+   "5": "Entertainment", 
+   "6": "Sports"
+ },
+ "questions": [
+   {
+     "answer": "Escher", 
+     "category": 2, 
+     "difficulty": 1, 
+     "id": 16, 
+     "question": "Which Dutch graphic artist–initials M C was a creator of optical illusions?"
+   },  
+   {
+     "answer": "Mona Lisa", 
+     "category": 2, 
+     "difficulty": 3, 
+     "id": 17, 
+     "question": "La Giaconda is better known as what?"
+   }
+ ], 
+ "success": true, 
+ "total_questions": 23
+}
+
+```
 ## Testing
 To run the tests, run
 ```
