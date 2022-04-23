@@ -79,21 +79,175 @@ One note before you delve into your tasks: for each endpoint, you are expected t
 
 ## Endpoints
 
-GET '/categories'
+GET  '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
 - Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+
+```json
 {
 "categories" :{
-'1' : "Science",
-'2' : "Art",
-'3' : "Geography",
-'4' : "History",
-'5' : "Entertainment",
-'6' : "Sports"
+"1" : "Science",
+"2" : "Art",
+"3" : "Geography",
+"4" : "History",
+"5" : "Entertainment",
+"6" : "Sports"
 },
 "success" : true
 }
+
+```
+GET  '/questions?page=<page_number>'
+- Fetches questons and answers based on the page number provided. By default page number is 1.
+- Request Arguments(optional): page:int
+- Returns: Object with categories with id: category_string as key:value pairs. Also Questions array with id, question, answer, category id and difficulty. It provides total number of questions available as well.
+- Example response: 
+
+```json
+{
+"categories": {
+   "1": "Science", 
+   "2": "Art", 
+   "3": "Geography", 
+   "4": "History", 
+   "5": "Entertainment", 
+   "6": "Sports"
+ },
+ "questions": [
+   {
+     "answer": "Escher", 
+     "category": 2, 
+     "difficulty": 1, 
+     "id": 16, 
+     "question": "Which Dutch graphic artist–initials M C was a creator of optical illusions?"
+   },  
+   {
+     "answer": "Mona Lisa", 
+     "category": 2, 
+     "difficulty": 3, 
+     "id": 17, 
+     "question": "La Giaconda is better known as what?"
+   }
+ ], 
+ "success": true, 
+ "total_questions": 23
+}
+
+```
+
+DELETE  '/questions/<question_id>'
+- Delete the questions from the repository based on the question id if exists.
+- Request Arguments: question_id:int
+- Returns: Delete the question from repository and provides response with deleted id.
+- Example response: 
+
+```json
+
+{
+  "deleted": 54,
+  "success": true
+}
+```
+
+POST  '/questions'
+- Creates a new question in the repository. 
+- Request Body: {question:string, answer:string, difficulty:int, category:string} (all fields are mandatory)
+- Returns: Adds new question to repository and provides response with created question id.
+- Example response: 
+
+```json
+
+{
+  "created": 55,
+  "success": true
+}
+```
+
+POST  '/questions/search'
+- Fetches all questions where a substring matches the search term (not case-sensitive)
+- Request Body: {searchterm:string}
+- Returns: Matching questions (not case-sensitive)
+- Example response: 
+
+```json
+{
+"questions": [
+    {
+      "answer": "Muhammad Ali", 
+      "category": 4, 
+      "difficulty": 1, 
+      "id": 9, 
+      "question": "What boxer's original name is Cassius Clay?"
+    }
+  ], 
+  "success": true, 
+  "total_questions": 11
+  }
+```
+
+GET  '/categories/<int:category_id>/questions'
+- Fetches all questions for the specified category
+- Request Arguments: category_id:int
+- Returns: Matching questions based on the category selected
+- Example response: 
+
+```json
+{
+"current_category": 6, 
+  "questions": [
+    {
+      "answer": "Brazil", 
+      "category": 6, 
+      "difficulty": 3, 
+      "id": 10, 
+      "question": "Which is the only team to play in every soccer World Cup tournament?"
+    }, 
+    {
+      "answer": "Uruguay", 
+      "category": 6, 
+      "difficulty": 4, 
+      "id": 11, 
+      "question": "Which country won the first ever soccer World Cup in 1930?"
+    }, 
+  ], 
+  "success": true, 
+  "total_questions": 2
+  }
+```
+
+POST  '/quizzes'
+- Fetches one random question for the seleted category. Previous questions are not asked again.
+- Request body: {previous_questions: arr, quiz_category: {id:int, type:string}}
+- Returns: Random question and answer with id, category and difficulty
+- Example response: 
+
+```json
+{
+  "question": {
+    "answer": "Uruguay", 
+    "category": 6, 
+    "difficulty": 4, 
+    "id": 11, 
+    "question": "Which country won the first ever soccer World Cup in 1930?"
+  }, 
+  "success": true
+}
+```
+## Error Responses
+400 - Bad request
+404 - Not found
+422 - Not processable
+
+Sample error response
+
+```json
+{
+ "error": 422,
+ "success": false
+ "message": "Not processable"
+}
+```
 
 ## Testing
 To run the tests, run
